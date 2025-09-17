@@ -14,7 +14,26 @@ Examples:
 TXT
 }
 
+# Task A
+error() {
+  echo "Error: $1"
+  usage
+  exit 2
+}
+# Task A
+
 name="stranger"
+
+# Task A
+while getopts ":hn:" opt; do
+  case "$opt" in
+    h) usage; exit 0 ;;
+    n) name="$OPTARG" ;;
+    \?) error "Unknown option: -$OPTARG" ;;
+    :)  error "Missing argument for -$OPTARG" ;;
+  esac
+done
+# Task A
 
 if [[ "${1:-}" == "-h" ]]; then
   usage
