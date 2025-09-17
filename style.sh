@@ -43,6 +43,12 @@ while getopts ":hn:c:u" opt; do
 done
 # Task A
 
+# Task D
+shift $((OPTIND-1))
+custom="${1:-}"
+msg="${custom:-Hello, $name!}"
+# Task D
+
 # Old check is no longer needed b/c getopts handles -h now
 # if [[ "${1:-}" == "-h" ]]; then
 #   usage
@@ -55,7 +61,6 @@ error "COUNT must be a positive integer (>=1)."
 fi
 
 # Task C
-msg="Hello, $name!"
 
 for ((i=1; i<=count; i++)); do
    if [ "$upper" = true ]; then
