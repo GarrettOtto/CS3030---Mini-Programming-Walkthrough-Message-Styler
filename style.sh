@@ -29,12 +29,14 @@ count=1
 # Task B
 
 # Task A & B)
-while getopts ":hn:c:" opt; do
+while getopts ":hn:c:u" opt; do
   case "$opt" in
     h) usage; exit 0 ;;
     n) name="$OPTARG" ;;
     # Task B
     c) count="$OPTARG" ;;
+    # Task C
+    u) upper=true ;;
     \?) error "Unknown option: -$OPTARG" ;;
     :)  error "Missing argument for -$OPTARG" ;;
   esac
@@ -52,7 +54,13 @@ if ! [[ "$count" =~ ^[1-9][0-9]*$ ]]; then
 error "COUNT must be a positive integer (>=1)."
 fi
 
+# Task C
+msg="Hello, $name!"
+
 for ((i=1; i<=count; i++)); do
-echo "Hello, $name!"
+   if [ "$upper" = true ]; then
+       echo "$msg" | tr '[:lower:]' '[:upper:]'
+   else
+       echo "$msg"
+   fi
 done
-# Task B
