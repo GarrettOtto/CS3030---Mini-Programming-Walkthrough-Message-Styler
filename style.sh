@@ -24,20 +24,35 @@ error() {
 
 name="stranger"
 
-# Task A
-while getopts ":hn:" opt; do
+# Task B
+count=1
+# Task B
+
+# Task A & B)
+while getopts ":hn:c:" opt; do
   case "$opt" in
     h) usage; exit 0 ;;
     n) name="$OPTARG" ;;
+    # Task B
+    c) count="$OPTARG" ;;
     \?) error "Unknown option: -$OPTARG" ;;
     :)  error "Missing argument for -$OPTARG" ;;
   esac
 done
 # Task A
 
-if [[ "${1:-}" == "-h" ]]; then
-  usage
-  exit 0
+# Old check is no longer needed b/c getopts handles -h now
+# if [[ "${1:-}" == "-h" ]]; then
+#   usage
+#   exit 0
+# fi
+
+# Task B
+if ! [[ "$count" =~ ^[1-9][0-9]*$ ]]; then
+error "COUNT must be a positive integer (>=1)."
 fi
 
+for ((i=1; i<=count; i++)); do
 echo "Hello, $name!"
+done
+# Task B
